@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
 
         var wOp: Int = 0
         var tipo: Int = 4
-        var n1: Int = 0
-        var n2: Int = 0
+        var n1: Double = 0.0
+        var n2: Double = 0.0
 
         b1.setOnClickListener {
             if(wOp == 0){
@@ -128,31 +128,52 @@ class MainActivity : AppCompatActivity() {
         }
 
         sum.setOnClickListener {
-            n1 = Integer.parseInt(operacion1.text.toString())
-            operacion1.setText(operacion1.text.toString() + "+")
-            tipo = 0
-            wOp = 1
+            if(operacion1.text.toString() == "" || wOp == 1){
+
+            }
+            else{
+                n1 = operacion1.text.toString().toDouble()
+                operacion1.setText(operacion1.text.toString() + "+")
+                tipo = 0
+                wOp = 1
+            }
         }
 
         resta.setOnClickListener {
-            n1 = Integer.parseInt(operacion1.text.toString())
-            operacion1.setText(operacion1.text.toString() + "-")
-            tipo = 1
-            wOp = 1
+            if(operacion1.text.toString() == "" || wOp == 1){
+
+            }
+            else{
+                n1 = operacion1.text.toString().toDouble()
+                operacion1.setText(operacion1.text.toString() + "-")
+                tipo = 1
+                wOp = 1
+            }
         }
 
         multi.setOnClickListener {
-            n1 = Integer.parseInt(operacion1.text.toString())
-            operacion1.setText(operacion1.text.toString() + "*")
-            tipo = 2
-            wOp = 1
+            if(operacion1.text.toString() == "" || wOp == 1){
+
+            }
+            else{
+                n1 = operacion1.text.toString().toDouble()
+                operacion1.setText(operacion1.text.toString() + "*")
+                tipo = 2
+                wOp = 1
+            }
+
         }
 
         div.setOnClickListener {
-            n1 = Integer.parseInt(operacion1.text.toString())
-            operacion1.setText(operacion1.text.toString() + "/")
-            tipo = 3
-            wOp = 1
+            if(operacion1.text.toString() == "" || wOp == 1){
+
+            }
+            else{
+                n1 = operacion1.text.toString().toDouble()
+                operacion1.setText(operacion1.text.toString() + "/")
+                tipo = 3
+                wOp = 1
+            }
         }
 
         reset.setOnClickListener{
@@ -163,39 +184,41 @@ class MainActivity : AppCompatActivity() {
         }
 
         resultado.setOnClickListener {
-            n2 = Integer.parseInt(operacion2.text.toString())
+            if(wOp == 1 && operacion2.text.toString() != "0") {
+                n2 = operacion2.text.toString().toDouble()
 
-            var resultado: Int = 0
+                var resultado: Double = 0.0
 
-            when(tipo){
-                0 -> resultado = sumar(n1,n2)
-                1 -> resultado = restar(n1,n2)
-                2 -> resultado = multi(n1,n2)
-                3 -> resultado = dividir(n1,n2)
+                when(tipo){
+                    0 -> resultado = sumar(n1,n2)
+                    1 -> resultado = restar(n1,n2)
+                    2 -> resultado = multi(n1,n2)
+                    3 -> resultado = dividir(n1,n2)
+                }
+
+                operacion1.setText(resultado.toString())
+                operacion2.setText("")
+                wOp = 0
+                tipo = 4
             }
-
-            operacion1.setText(resultado.toString())
-            operacion2.setText("")
-            wOp = 0
-            tipo = 4
         }
 
     }
 
 
-    fun sumar(n1: Int, n2: Int): Int{
+    fun sumar(n1: Double, n2: Double): Double{
         return n1 + n2
     }
 
-    fun restar(n1: Int, n2: Int): Int{
+    fun restar(n1: Double, n2: Double): Double{
         return n1 - n2
     }
 
-    fun multi(n1: Int, n2: Int): Int{
+    fun multi(n1: Double, n2: Double): Double{
         return n1 * n2
     }
 
-    fun dividir(n1: Int, n2: Int): Int{
+    fun dividir(n1: Double, n2: Double): Double{
         return n1 / n2
     }
 }
